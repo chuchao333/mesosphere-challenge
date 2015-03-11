@@ -84,3 +84,12 @@ gradle build
 gradle run
 
 ```
+
+Optionally, you can run:
+
+```
+gradle idea
+```
+
+to generate the project files for intellij. (Yes, I prefer intelij over eclipse :) )
+
