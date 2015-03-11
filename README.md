@@ -73,3 +73,14 @@ where N = max floor - 1, d = distance between elevator and the call and C is the
 This algorithm tend to keep the waiting time small while also have a good enough sojourn time.
 
 Compared with the FCFS algorithm, it honors both temporal and spatial efficiencies, and also have considered the load balance among the multiple elevators.
+
+## How to build
+
+```
+# build the source files
+gradle build
+
+# build and run the simulation
+gradle run
+
+```
