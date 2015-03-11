@@ -1,0 +1,21 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+ext.scalaVersion = '2.11.5'
+
+repositories{
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies{
+    compile "org.scala-lang:scala-library:$scalaVersion"
+    testCompile "org.scalatest:scalatest_2.11:2.2.4"
+    testCompile "junit:junit:4.11"
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'com.mesosphere.challenge.Main'
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+}
