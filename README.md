@@ -2,23 +2,18 @@
 
 ## Introduction
 
-Instead of the over-simplied the interfaces in the original problem specification, the
+Instead of the over-simplied the interfaces in the original problem specification, the signatures are changed according to how I model the domains in my solution:
 
-signatures are changed according to how I model the domains in my solution:
+* *status()*: State of an elevator is represented as instances of ElevatorState
 
-* State of an elevator is represented as instances of ElevatorState
-
-* update(elevatorId, floor, direction) can be used to set the floor and direction of
+* *update(elevatorId, floor, direction)* can be used to set the floor and direction of
 given elevator (but it's not used in my simulation)
 
-* pickup takes an instance of Passenger
+* *pickup* takes an instance of Passenger
 
-Instances of Passenger specify the starintFloor and goalFloor, (thus the direction
-could be determined). More properties can be added to this when extending the design
-to meet the real world requirements. E.g., add a 'weight' and the capacity of an
-elevator could be checked based on the current total weight.
+** Instances of Passenger specify the starintFloor and goalFloor, (thus the direction could be determined). More properties can be added to this when extending the design to meet the real world requirements. E.g., add a 'weight' and the capacity of an elevator could be checked based on the current total weight.
 
-* the step() will try to schedule the current outstanding passengers in the system
+* *step()* will try to schedule the current outstanding passengers in the system
 
 And it will also move all the elevators based on the current state and update the
 
@@ -70,17 +65,11 @@ This implements the ElevatorControlSystem and mixin the scheduler above.
 
 ### Main
 
-This is the driver program, it have some utilities to generate batches of passengers
-
-to simuate the pickup requests and send commands to the control system to run the 
-
-simulation until all the passengers in all the batches are processed.
+This is the driver program, it have some utilities to generate batches of passengers to simuate the pickup requests and send commands to the control system to run the simulation until all the passengers in all the batches are processed.
 
 ## Schedule Algorithm
 
-Each passenger is assigned to the 'nearest' elevator as determined by elevator
-
-position, diretion of the call, and elevator direction.
+Each passenger is assigned to the 'nearest' elevator as determined by elevator position, diretion of the call, and elevator direction.
 
 The weight of the suitability is computed as:
 
@@ -88,14 +77,8 @@ The weight of the suitability is computed as:
 * towards the call, opposite direction: weight = (N+1) -d + C
 * away form the call, 1 + C
 
-where N = max floor - 1, d = distance between elevator and the call and C is the
+where N = max floor - 1, d = distance between elevator and the call and C is the extra capacity.
 
-extra capacity.
+This algoritm tend to keep the waiting time small while also have a good enough sojourn time.
 
-This algoritm tend to keep the waiting time small while also have a good enough sojourn
-
-time.
-
-Compared with the FCFS algorithm, it honors both temporal and spatial efficiencies, and
-
-also have considered the load banlance among the multiple elevators.
+Compared with the FCFS algorithm, it honors both temporal and spatial efficiencies, and also have considered the load banlance among the multiple elevators.
